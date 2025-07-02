@@ -17,8 +17,18 @@ function dragOver(event) {
     event.preventDefault();
 }
 
+// function drop(event) {
+//     event.preventDefault();
+//     this.appendChild(currentDraggedElement);
+//     currentDraggedElement = null;
+// }
+
 function drop(event) {
     event.preventDefault();
+    // Check if the drop zone already has a label
+    if (this.querySelector('.label')) {
+        return; // Exit if there's already a label
+    }
     this.appendChild(currentDraggedElement);
     currentDraggedElement = null;
 }
