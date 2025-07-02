@@ -5,6 +5,9 @@ const labels = document.querySelectorAll(".label");
 const targetZones = document.querySelectorAll(".target-zone");
 let currentDraggedElement = null;
 
+const resetBtn = document.getElementById('reset-btn');
+const labelBox = document.getElementById('label-box');
+
 //functions
 
 function dragStart() {
@@ -15,6 +18,14 @@ function dragStart() {
 
 function dragOver(event) {
     event.preventDefault();
+}
+
+function resetGame() {
+    // Get all labels, including those in drop zones
+    const allLabels = document.querySelectorAll('.label');
+    allLabels.forEach(label => {
+        labelBox.appendChild(label);
+    });
 }
 
 // function drop(event) {
@@ -43,3 +54,5 @@ targetZones.forEach(target => {
     target.addEventListener("dragover", dragOver);
     target.addEventListener("drop", drop);
 });
+
+resetBtn.addEventListener('click', resetGame);
