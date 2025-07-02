@@ -36,12 +36,25 @@ function resetGame() {
 
 function drop(event) {
     event.preventDefault();
-    // Check if the drop zone already has a label
     if (this.querySelector('.label')) {
-        return; // Exit if there's already a label
+        this.style.backgroundColor = 'rgba(200, 200, 200, 0.2)';
+        this.style.border = '2px dashed rgba(80, 206, 22, 0.6)';
+        return;
     }
     this.appendChild(currentDraggedElement);
+    this.style.backgroundColor = 'rgba(200, 200, 200, 0.2)';
+    this.style.border = '2px dashed rgba(80, 206, 22, 0.6)';
     currentDraggedElement = null;
+}
+
+function dragEnter() {
+    this.style.backgroundColor = 'rgba(80, 206, 22, 0.3)';
+    this.style.border = '2px dashed rgba(80, 206, 22, 0.8)';
+}
+
+function dragLeave() {
+    this.style.backgroundColor = 'rgba(200, 200, 200, 0.2)';
+    this.style.border = '2px dashed rgba(80, 206, 22, 0.6)';
 }
 
 //Event listeners
@@ -51,8 +64,10 @@ labels.forEach(label => {
 });
 
 targetZones.forEach(target => {
-    target.addEventListener("dragover", dragOver);
-    target.addEventListener("drop", drop);
+    target.addEventListener('dragover', dragOver);
+    target.addEventListener('drop', drop);
+    target.addEventListener('dragenter', dragEnter);
+    target.addEventListener('dragleave', dragLeave);
 });
 
 resetBtn.addEventListener('click', resetGame);
